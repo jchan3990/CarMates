@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Container } from 'semantic-ui-react';
+
+import 'semantic-ui-css/semantic.min.css';
 
 const App = () => {
 
   return (
-    <div>
-      Hello World!
-    </div>
+    <Router>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/login' component={Login} />
+      <Route exact path='/register' component={Register} />
+    </Router>
   )
 };
 

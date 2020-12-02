@@ -1,7 +1,9 @@
 
-const mongoose = require('mongoose');
 const { ApolloServer, PubSub } = require ('apollo-server');
 const { GraphQLScalarType } = require('graphql')
+const mongoose = require('mongoose');
+const Parser = require('body-parser');
+const express = require('express');
 
 const { MONGODB } = require('../config.js');
 const typeDefs = require('../db/typeDefs.js')
@@ -9,6 +11,18 @@ const resolvers = require('../db/resolvers')
 const Post = require('./model/Post.js');
 const User = require('./model/User.js')
 
+// React App Server Config
+const app = express();
+const port = 3333;
+app.use(express.static('./client/dist'));
+app.use(Parser.urlencoded({ extended: true}));
+app.use(Parser.json());
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+
+// MongoDB Server Config
 const pubsub = new PubSub();
 const server = new ApolloServer({
   typeDefs,

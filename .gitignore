@@ -3,3 +3,6 @@ node_modules
 
 # Ignore config.js
 config.js
+
+# Igore backup Webpack File
+webpack.config.copy.js
