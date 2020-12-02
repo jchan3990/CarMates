@@ -1,16 +1,25 @@
-const Parser = require('body-parser');
-const express = require('express');
-const app = express();
-const port = 3000;
 
-app.use(express.static('./client/dist'));
-app.use(Parser.urlencoded({extended: true}));
-app.use(Parser.json());
+const mongoose = require('mongoose');
+const { ApolloServer } = require ('apollo-server');
+const { GraphQLScalarType } = require('graphql')
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+const { MONGODB } = require('../config.js');
+const typeDefs = require('../db/typeDefs.js')
+const resolvers = require('../db/resolvers')
+const Post = require('./model/Post.js');
+const User = require('./model/User.js')
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ req })
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+mongoose.connect(MONGODB, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then(() => {
+    console.log('MongoDB Connected');
+    return server.listen({ port: 3000});
+  })
+  .then(res => {
+    console.log(`Server running at ${res.url}`)
+  })
