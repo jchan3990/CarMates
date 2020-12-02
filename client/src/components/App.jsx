@@ -4,17 +4,20 @@ import { Container } from 'semantic-ui-react';
 
 import 'semantic-ui-css/semantic.min.css';
 
+import MenuBar from './MenuBar.jsx';
 import Home from '../pages/Home.js';
 import Login from '../pages/Login.js';
 import Register from '../pages/Register.js';
 
 const App = () => {
-
   return (
     <Router>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/register' component={Register} />
+      <Container>
+        <MenuBar />
+        <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Register} />
+      </Container>
     </Router>
   )
 };

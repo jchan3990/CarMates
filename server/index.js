@@ -1,9 +1,10 @@
 
 const { ApolloServer, PubSub } = require ('apollo-server');
-const { GraphQLScalarType } = require('graphql')
-const mongoose = require('mongoose');
 const Parser = require('body-parser');
 const express = require('express');
+const { GraphQLScalarType } = require('graphql')
+const mongoose = require('mongoose');
+const path = require('path');
 
 const { MONGODB } = require('../config.js');
 const typeDefs = require('../db/typeDefs.js')
@@ -17,6 +18,14 @@ const port = 3333;
 app.use(express.static('./client/dist'));
 app.use(Parser.urlencoded({ extended: true}));
 app.use(Parser.json());
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
