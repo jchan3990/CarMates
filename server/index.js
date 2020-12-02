@@ -1,6 +1,6 @@
 
 const mongoose = require('mongoose');
-const { ApolloServer } = require ('apollo-server');
+const { ApolloServer, PubSub } = require ('apollo-server');
 const { GraphQLScalarType } = require('graphql')
 
 const { MONGODB } = require('../config.js');
@@ -9,10 +9,11 @@ const resolvers = require('../db/resolvers')
 const Post = require('./model/Post.js');
 const User = require('./model/User.js')
 
+const pubsub = new PubSub();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req })
+  context: ({ req }) => ({ req, pubsub })
 })
 
 mongoose.connect(MONGODB, {useNewUrlParser: true, useUnifiedTopology: true})
