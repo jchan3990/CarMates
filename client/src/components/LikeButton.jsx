@@ -21,7 +21,7 @@ const LikeButton = ({ user, post: { id, likes, likeCount }}) => {
   })
 
   const likeButton = user ? (
-    liked? (
+    liked ? (
       <Button color='teal'>
         <Icon name='heart' />
       </Button>
