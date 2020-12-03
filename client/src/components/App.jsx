@@ -9,16 +9,21 @@ import Home from '../pages/Home.js';
 import Login from '../pages/Login.js';
 import Register from '../pages/Register.js';
 
+import { AuthProvider } from '../context/auth.js';
+import AuthRoute from '../utils/AuthRoute.js';
+
 const App = () => {
   return (
-    <Router>
-      <Container>
-        <MenuBar />
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={Register} />
-      </Container>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Container>
+          <MenuBar />
+          <Route exact path='/' component={Home} />
+          <AuthRoute exact path='/login' component={Login} />
+          <AuthRoute exact path='/register' component={Register} />
+        </Container>
+      </Router>
+    </AuthProvider>
   )
 };
 
