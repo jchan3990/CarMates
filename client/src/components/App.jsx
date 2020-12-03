@@ -8,6 +8,7 @@ import MenuBar from './MenuBar.jsx';
 import Home from '../pages/Home.js';
 import Login from '../pages/Login.js';
 import Register from '../pages/Register.js';
+import SinglePost from '../pages/SinglePost.js';
 
 import { AuthProvider } from '../context/auth.js';
 import AuthRoute from '../utils/AuthRoute.js';
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path='/' component={Home} />
           <AuthRoute exact path='/login' component={Login} />
           <AuthRoute exact path='/register' component={Register} />
+          <Route exact path='/posts/:postId' component={SinglePost} />
         </Container>
       </Router>
     </AuthProvider>
