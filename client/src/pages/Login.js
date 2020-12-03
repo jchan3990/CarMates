@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
 import { AuthContext } from '../context/auth.js';
 import { useForm } from '../utils/hooks.js';
+import { LOGIN_USER } from '../utils/graphql.js';
 
 const Login = (props) => {
   const context = useContext(AuthContext);
@@ -70,23 +70,5 @@ const Login = (props) => {
       </div>
   )
 };
-
-const LOGIN_USER = gql`
-  mutation login (
-    $username: String!
-    $password: String!
-  ) {
-    login (
-      username: $username
-      password: $password
-    ) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`
 
 export default Login;
