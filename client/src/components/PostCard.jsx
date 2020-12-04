@@ -16,12 +16,13 @@ const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCou
       <Card.Content>
         <Image
           floated='right'
-          size='mini'
-          src='https://react.semantic-ui.com/images/avatar/large/molly.png'
+          avatar
+          size='small'
+          src='https://i.pinimg.com/originals/3b/5e/63/3b5e63ea21bd2686ed344a4e94c644d1.jpg'
         />
         <Card.Header>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
-        <Card.Description>
+        <Card.Description as={Link} to={`/posts/${id}`} style={{display: 'block'}}>
           {body}
         </Card.Description>
       </Card.Content>
