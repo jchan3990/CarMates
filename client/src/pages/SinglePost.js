@@ -7,6 +7,7 @@ import { AuthContext } from '../context/auth.js';
 import { CREATE_COMMENT_MUTATION, FETCH_POST_QUERY } from '../utils/graphql.js';
 import LikeButton from '../components/LikeButton.jsx';
 import DeleteButton from '../components/DeleteButton.jsx';
+import MyPopup from '../utils/MyPopup.js';
 
 const SinglePost = (props) => {
   const [comment, setComment] = useState('');
@@ -61,10 +62,11 @@ const SinglePost = (props) => {
               <hr/>
               <Card.Content extra>
                 <LikeButton user={user} post={{ id, likeCount, likes }} />
-                <Button
-                  as='div'
-                  labelPosition='right'
-                  onClick={() => console.log('Comment on post')}
+                <MyPopup content="Comment on post">
+                  <Button
+                    as='div'
+                    labelPosition='right'
+                    onClick={() => console.log('Comment on post')}
                   >
                     <Button basic color='blue'>
                       <Icon name='comments'/>
@@ -73,6 +75,7 @@ const SinglePost = (props) => {
                       {commentCount}
                     </Label>
                   </Button>
+                </MyPopup>
                   {user && user.username === username && (
                     <DeleteButton className='delCommBtn' postId={id} callback={deletePostCb} />
                   )}

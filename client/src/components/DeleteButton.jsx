@@ -3,7 +3,8 @@ import { useMutation } from '@apollo/react-hooks';
 import { Button, Confirm, Icon } from 'semantic-ui-react';
 
 import { CREATE_COMMENT_MUTATION, FETCH_POSTS_QUERY, DELETE_POST_MUTATION, DELETE_COMMENT_MUTATION } from '../utils/graphql.js';
-import { AuthContext } from '../context/auth.js'
+import { AuthContext } from '../context/auth.js';
+import MyPopup from '../utils/MyPopup.js';
 
 const DeleteButton = ({ postId, commentId, callback }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -35,6 +36,7 @@ const DeleteButton = ({ postId, commentId, callback }) => {
 
   return (
     <>
+    <MyPopup content={commentId ? 'Delete comment' : 'Delete post'}>
       <Button
         as='div'
         color='red'
@@ -43,11 +45,12 @@ const DeleteButton = ({ postId, commentId, callback }) => {
       >
         <Icon name="trash" style={{margin: 0}}/>
       </Button>
-      <Confirm
-        open={confirmOpen}
-        onCancel={() => setConfirmOpen(false)}
-        onConfirm={deletePostOrComment}
-      />
+    </MyPopup>
+    <Confirm
+      open={confirmOpen}
+      onCancel={() => setConfirmOpen(false)}
+      onConfirm={deletePostOrComment}
+    />
     </>
   )
 }
