@@ -11,6 +11,7 @@ import MyPopup from '../utils/MyPopup.js';
 
 const SinglePost = (props) => {
   const [comment, setComment] = useState('');
+  const [commentInput, setCommentInput] = useState(false);
 
   const postId = props.match.params.postId;
   const { user } = useContext(AuthContext);
@@ -22,6 +23,11 @@ const SinglePost = (props) => {
       postId,
     }
   });
+
+  const showCommentInput = () => {
+    if (!commentInput) setCommentInput(true);
+    else setCommentInput(false);
+  }
 
   const [submitComment] = useMutation(CREATE_COMMENT_MUTATION, {
     update() {
@@ -37,6 +43,7 @@ const SinglePost = (props) => {
   const deletePostCb = () => {
     props.history.push('/');
   }
+
   let postMarkup;
   if (!getPost) {
     postMarkup = <p>Loading post...</p>
@@ -66,7 +73,7 @@ const SinglePost = (props) => {
                   <Button
                     as='div'
                     labelPosition='right'
-                    onClick={() => console.log('Comment on post')}
+                    onClick={showCommentInput}
                   >
                     <Button basic color='blue'>
                       <Icon name='comments'/>
@@ -81,7 +88,7 @@ const SinglePost = (props) => {
                   )}
               </Card.Content>
             </Card>
-            {user &&
+            {user && commentInput &&
               <Card fluid>
                 <Card.Content>
                   <p>Post a comment</p>
