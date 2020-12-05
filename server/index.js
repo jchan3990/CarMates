@@ -31,7 +31,7 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-// MongoDB Server Config
+// GraphQL/MongoDB Server Config
 const pubsub = new PubSub();
 const server = new ApolloServer({
   typeDefs,
