@@ -15,6 +15,7 @@ const Register = (props) => {
     username: '',
     password: '',
     confirmPassword: '',
+    avatar: ''
   })
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
@@ -70,6 +71,15 @@ const Register = (props) => {
           name="confirmPassword"
           value={values.confirmPassword}
           error={errors.confirmPassword ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          type="avatar"
+          label="Avatar"
+          placeholder="Avatar..."
+          name="Avatar"
+          value={values.avatar}
+          error={errors.avatar ? true : false}
           onChange={onChange}
         />
         <Button type="submit" primary>
