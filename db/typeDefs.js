@@ -4,8 +4,8 @@ module.exports = gql`
   scalar Date
   type Post {
     id: ID!,
-    body: String!,
-    createdAt: Date!,
+    body: String!
+    createdAt: Date!
     username: String!
     comments: [Comment]!
     likes: [Like]!
@@ -41,6 +41,7 @@ module.exports = gql`
   type Query {
     getPosts: [Post]
     getPost(postId: ID!): Post
+    getUser(username: String!): User
   }
   type Mutation {
     register(registerInput: RegisterInput): User!

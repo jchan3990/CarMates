@@ -19,6 +19,20 @@ const generateToken = user => {
 }
 
 module.exports = {
+  Query: {
+    async getUser(_, { username }) {
+      try {
+        const user = await User.findOne({"username": username})
+        if (user) {
+          return user;
+        } else {
+          throw new Error('User not found');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    }
+  },
   Mutation: {
     async login(_, { username, password }) {
       const {errors, valid} = validateLoginInput(username, password);
@@ -76,7 +90,8 @@ module.exports = {
         email,
         username,
         password,
-        createdAt: new Date()
+        createdAt: new Date(),
+        avatar
       })
 
       const res = await newUser.save();

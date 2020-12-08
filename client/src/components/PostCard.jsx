@@ -1,24 +1,33 @@
 import React, { useContext } from 'react';
 import { Button, Card, Icon, Label, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
 
 import { AuthContext } from '../context/auth.js';
 import LikeButton from './LikeButton.jsx';
 import DeleteButton from './DeleteButton.jsx';
 import MyPopup from '../utils/MyPopup.js';
+import { FETCH_USER_QUERY } from '../utils/graphql.js';
 
 const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCount, likes } }) => {
   const { user } = useContext(AuthContext);
 
-  return (
+  const { loading, data: {getUser: userData} = {} } = useQuery(FETCH_USER_QUERY, {
+    variables: {
+      username,
+    }
+  });
+
+  let posts = loading ?
+    <p>Loading posts...</p> :
     <Card fluid>
       <Card.Content>
         <Image
           floated='right'
           avatar
           size='small'
-          src='https://i.pinimg.com/originals/3b/5e/63/3b5e63ea21bd2686ed344a4e94c644d1.jpg'
+          src={userData.avatar}
         />
         <Card.Header>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
@@ -41,7 +50,9 @@ const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCou
         {user && user.username === username && <DeleteButton postId={id} />}
       </Card.Content>
     </Card>
-  )
+
+
+  return posts;
 };
 
 export default PostCard;

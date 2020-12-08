@@ -74,10 +74,10 @@ const Register = (props) => {
           onChange={onChange}
         />
         <Form.Input
-          type="avatar"
+          type="text"
           label="Avatar"
           placeholder="Avatar..."
-          name="Avatar"
+          name="avatar"
           value={values.avatar}
           error={errors.avatar ? true : false}
           onChange={onChange}

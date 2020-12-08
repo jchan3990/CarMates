@@ -22,6 +22,39 @@ export const FETCH_POSTS_QUERY = gql`
 }
 `;
 
+export const FETCH_POST_QUERY = gql`
+  query($postId: ID!) {
+    getPost(postId: $postId) {
+      id
+      body
+      createdAt
+      username
+      likeCount
+      likes {
+        username
+      }
+      commentCount
+      comments {
+        id
+        username
+        createdAt
+        body
+      }
+    }
+  }
+`;
+
+export const FETCH_USER_QUERY = gql`
+query($username: String!) {
+  getUser(username: $username) {
+    id
+    email
+    avatar
+    createdAt
+  }
+}
+`;
+
 export const LOGIN_USER = gql`
   mutation login (
     $username: String!
@@ -38,7 +71,7 @@ export const LOGIN_USER = gql`
       token
     }
   }
-`
+`;
 
 export const REGISTER_USER = gql`
   mutation register (
@@ -46,6 +79,7 @@ export const REGISTER_USER = gql`
     $username: String!
     $password: String!
     $confirmPassword: String!
+    $avatar: String!
   ) {
     register (
       registerInput: {
@@ -53,6 +87,7 @@ export const REGISTER_USER = gql`
         username: $username
         password: $password
         confirmPassword: $confirmPassword
+        avatar: $avatar
       }
     ) {
       id
@@ -62,7 +97,8 @@ export const REGISTER_USER = gql`
       token
     }
   }
-`
+`;
+
 export const CREATE_POST = gql`
   mutation createPost($body: String!) {
     createPost(body: $body) {
@@ -85,7 +121,7 @@ export const CREATE_POST = gql`
       commentCount
     }
   }
-`
+`;
 
 export const LIKE_POST_MUTATION = gql`
   mutation likePost($postId: ID!) {
@@ -97,35 +133,13 @@ export const LIKE_POST_MUTATION = gql`
       likeCount
     }
   }
-`
-
-export const FETCH_POST_QUERY = gql`
-  query($postId: ID!) {
-    getPost(postId: $postId) {
-      id
-      body
-      createdAt
-      username
-      likeCount
-      likes {
-        username
-      }
-      commentCount
-      comments {
-        id
-        username
-        createdAt
-        body
-      }
-    }
-  }
-`
+`;
 
 export const DELETE_POST_MUTATION = gql`
   mutation deletePost($postId: ID!) {
     deletePost(postId: $postId)
   }
-`
+`;
 
 export const DELETE_COMMENT_MUTATION = gql`
   mutation deleteComment($postId: ID!, $commentId: ID!) {
@@ -140,7 +154,7 @@ export const DELETE_COMMENT_MUTATION = gql`
       commentCount
     }
   }
-`
+`;
 
 export const CREATE_COMMENT_MUTATION = gql`
   mutation createComment($postId: ID!, $body: String!) {
@@ -155,4 +169,4 @@ export const CREATE_COMMENT_MUTATION = gql`
       commentCount
     }
   }
-  `
+  `;

@@ -24,6 +24,8 @@ const SinglePost = (props) => {
     }
   });
 
+  console.log(getPost);
+
   const showCommentInput = () => {
     if (!commentInput) setCommentInput(true);
     else setCommentInput(false);
