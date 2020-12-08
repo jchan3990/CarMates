@@ -7,6 +7,7 @@ export const FETCH_POSTS_QUERY = gql`
     body
     createdAt
     username
+    avatar
     likeCount
     likes {
       username
@@ -29,6 +30,7 @@ export const FETCH_POST_QUERY = gql`
       body
       createdAt
       username
+      avatar
       likeCount
       likes {
         username
@@ -106,6 +108,7 @@ export const CREATE_POST = gql`
       body
       createdAt
       username
+      avatar
       likes {
         id
         username

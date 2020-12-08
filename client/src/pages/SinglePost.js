@@ -24,8 +24,6 @@ const SinglePost = (props) => {
     }
   });
 
-  console.log(getPost);
-
   const showCommentInput = () => {
     if (!commentInput) setCommentInput(true);
     else setCommentInput(false);
@@ -50,13 +48,15 @@ const SinglePost = (props) => {
   if (!getPost) {
     postMarkup = <p>Loading post...</p>
   } else {
-    const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost;
+    const { id, body, createdAt, username, avatar, comments, likes, likeCount, commentCount } = getPost;
+
     postMarkup = (
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
             <Image
-              src='https://react.semantic-ui.com/images/avatar/large/molly.png'
+              avatar
+              src={avatar}
               size='small'
               float='right'
               />
