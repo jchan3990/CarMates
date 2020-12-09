@@ -15,7 +15,10 @@ const Register = (props) => {
     username: '',
     password: '',
     confirmPassword: '',
-    avatar: ''
+    avatar: '',
+    carYear: '',
+    carMake: '',
+    carModel: ''
   })
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
@@ -37,6 +40,7 @@ const Register = (props) => {
     <div className='form-container'>
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ''}>
         <h1>Register</h1>
+        <p>User Info</p>
         <Form.Input
           type="text"
           label="Email"
@@ -80,6 +84,35 @@ const Register = (props) => {
           name="avatar"
           value={values.avatar}
           error={errors.avatar ? true : false}
+          onChange={onChange}
+        />
+        <br/>
+        <p>Car Info</p>
+        <Form.Input
+          type="text"
+          label="Year"
+          placeholder="Year..."
+          name="carYear"
+          value={values.carYear}
+          error={errors.carYear ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          type="text"
+          label="Make"
+          placeholder="Make..."
+          name="carMake"
+          value={values.carMake}
+          error={errors.carMake ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          type="text"
+          label="Model"
+          placeholder="Model..."
+          name="carModel"
+          value={values.carModel}
+          error={errors.carModel ? true : false}
           onChange={onChange}
         />
         <Button type="submit" primary>

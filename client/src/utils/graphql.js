@@ -81,7 +81,10 @@ export const REGISTER_USER = gql`
     $username: String!
     $password: String!
     $confirmPassword: String!
-    $avatar: String!
+    $avatar: String
+    $carYear: String
+    $carMake: String
+    $carModel: String
   ) {
     register (
       registerInput: {
@@ -90,6 +93,9 @@ export const REGISTER_USER = gql`
         password: $password
         confirmPassword: $confirmPassword
         avatar: $avatar
+        carYear: $carYear
+        carMake: $carMake
+        carModel: $carModel
       }
     ) {
       id
@@ -97,6 +103,10 @@ export const REGISTER_USER = gql`
       username
       createdAt
       token
+      avatar
+      carYear
+      carMake
+      carModel
     }
   }
 `;

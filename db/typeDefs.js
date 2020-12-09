@@ -30,14 +30,20 @@ module.exports = gql`
     token: String!
     username: String!
     createdAt: Date!
-    avatar: String!
+    avatar: String
+    carYear: String
+    carMake: String
+    carModel: String
   }
   input RegisterInput {
+    email: String!
     username: String!
     password: String!
     confirmPassword: String!
-    email: String!
-    avatar: String!
+    avatar: String
+    carYear: String
+    carMake: String
+    carModel: String
   }
   type Query {
     getPosts: [Post]

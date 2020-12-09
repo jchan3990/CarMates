@@ -19,6 +19,13 @@ const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCou
     }
   });
 
+  let defaultAvatar = 'https://artprojectsforkids.org/wp-content/uploads/2020/09/Easy-Car-1024x791.jpg'
+  let userAvatar;
+
+  if (userData) {
+    userAvatar = userData.avatar !== '' ? userData.avatar : defaultAvatar;
+  }
+
   let posts = loading ?
     <p>Loading posts...</p> :
     <Card fluid>
@@ -27,7 +34,7 @@ const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCou
           floated='right'
           avatar
           size='small'
-          src={userData.avatar}
+          src={userAvatar}
         />
         <Card.Header>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>

@@ -64,7 +64,7 @@ module.exports = {
     async register(
       _,
       {
-        registerInput: { username, email, password, confirmPassword, avatar }
+        registerInput: { username, email, password, confirmPassword, avatar, carYear, carMake, carModel }
       },
       context,
       info
@@ -91,7 +91,10 @@ module.exports = {
         username,
         password,
         createdAt: new Date(),
-        avatar
+        avatar,
+        carYear,
+        carMake,
+        carModel
       })
 
       const res = await newUser.save();

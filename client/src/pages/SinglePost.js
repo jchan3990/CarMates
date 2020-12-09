@@ -49,14 +49,15 @@ const SinglePost = (props) => {
     postMarkup = <p>Loading post...</p>
   } else {
     const { id, body, createdAt, username, avatar, comments, likes, likeCount, commentCount } = getPost;
-
+    let defaultAvatar = 'https://artprojectsforkids.org/wp-content/uploads/2020/09/Easy-Car-1024x791.jpg'
+    let userAvatar = avatar !== '' ? avatar : defaultAvatar;
     postMarkup = (
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
             <Image
               avatar
-              src={avatar}
+              src={userAvatar}
               size='small'
               float='right'
               />
