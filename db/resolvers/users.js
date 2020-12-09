@@ -64,7 +64,7 @@ module.exports = {
     async register(
       _,
       {
-        registerInput: { username, email, password, confirmPassword, avatar, carYear, carMake, carModel }
+        registerInput: { username, email, password, confirmPassword, zipCode, avatar, carYear, carMake, carModel }
       },
       context,
       info
@@ -91,6 +91,7 @@ module.exports = {
         username,
         password,
         createdAt: new Date(),
+        zipCode,
         avatar,
         carYear,
         carMake,

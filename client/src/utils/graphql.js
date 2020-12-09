@@ -81,6 +81,7 @@ export const REGISTER_USER = gql`
     $username: String!
     $password: String!
     $confirmPassword: String!
+    $zipCode: String
     $avatar: String
     $carYear: String
     $carMake: String
@@ -92,6 +93,7 @@ export const REGISTER_USER = gql`
         username: $username
         password: $password
         confirmPassword: $confirmPassword
+        zipCode: $zipCode
         avatar: $avatar
         carYear: $carYear
         carMake: $carMake
@@ -103,6 +105,7 @@ export const REGISTER_USER = gql`
       username
       createdAt
       token
+      zipCode
       avatar
       carYear
       carMake

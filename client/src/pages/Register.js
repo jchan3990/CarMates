@@ -15,6 +15,7 @@ const Register = (props) => {
     username: '',
     password: '',
     confirmPassword: '',
+    zipCode: '',
     avatar: '',
     carYear: '',
     carMake: '',
@@ -75,6 +76,15 @@ const Register = (props) => {
           name="confirmPassword"
           value={values.confirmPassword}
           error={errors.confirmPassword ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          type="text"
+          label="Zipcode"
+          placeholder="Zipcode..."
+          name="zipCode"
+          value={values.zipCode}
+          error={errors.zipCode ? true : false}
           onChange={onChange}
         />
         <Form.Input
