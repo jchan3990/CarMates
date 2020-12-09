@@ -35,6 +35,11 @@ module.exports = gql`
     carYear: String
     carMake: String
     carModel: String
+    friends: [Friend]!
+  }
+  type Friend {
+    id: ID!
+    username: String!
   }
   input RegisterInput {
     email: String!
@@ -57,12 +62,11 @@ module.exports = gql`
     login(username: String!, password: String!): User!
     createPost(body: String!): Post!
     deletePost(postId: ID!): String!
-    createComment(postId: String!, body: String!): Post!
+    createComment(postId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
     likePost(postId: ID!): Post!
   }
   type Subscription {
     newPost: Post!
-
   }
 `;
