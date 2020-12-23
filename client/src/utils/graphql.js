@@ -50,9 +50,14 @@ export const FETCH_USER_QUERY = gql`
 query($username: String!) {
   getUser(username: $username) {
     id
+    username
     email
     avatar
     createdAt
+    zipCode
+    carYear
+    carMake
+    carModel
   }
 }
 `;

@@ -6,3 +6,6 @@ config.js
 
 # Igore backup Webpack File
 webpack.config.copy.js
+
+#Ignore package-lock.json
+package-lock.json

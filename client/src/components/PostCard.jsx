@@ -36,7 +36,7 @@ const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCou
           size='small'
           src={userAvatar}
         />
-        <Card.Header>{username}</Card.Header>
+        <Card.Header as={Link} to={`/users/${username}`}>{username}</Card.Header>
         <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
         <Card.Description as={Link} to={`/posts/${id}`} style={{display: 'block'}}>
           {body}
