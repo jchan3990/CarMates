@@ -16,10 +16,17 @@ const MenuBar = () => {
     <Menu pointing secondary size="massive" color="red">
       <Menu.Item
         name={user.username}
-        active
+        active={activeItem === user.username}
         onClick={handleItemClick}
         as={Link}
         to={`/users/${user.username}`}
+      />
+      <Menu.Item
+        name='feed'
+        active={activeItem === 'feed'}
+        onClick={handleItemClick}
+        as={Link}
+        to="/"
       />
       <Menu.Menu position='right'>
       <Menu.Item
@@ -38,7 +45,7 @@ const MenuBar = () => {
         to="/"
       />
       <Menu.Menu position='right'>
-      <Menu.Item
+        <Menu.Item
           name='login'
           active={activeItem === 'login'}
           onClick={handleItemClick}
