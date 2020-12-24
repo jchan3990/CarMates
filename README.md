@@ -11,6 +11,10 @@ webpack -d --watch
 nodemon server/index.js
 ```
 
+## Database ##
+Will need to configure mongoDB for database.
+* Need a config.js for your API key
+
 ## Requirements ##
 An `nvmrc` file is included if using [nvm](https://github.com/nvm-sh/nvm).
 * Node v14.2.0
