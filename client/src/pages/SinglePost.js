@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Button, Card, Form, Grid, Icon, Image, Label } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import { AuthContext } from '../context/auth.js';
@@ -65,7 +66,7 @@ const SinglePost = (props) => {
           <Grid.Column width={10}>
             <Card fluid>
               <Card.Content>
-                <Card.Header>{username}</Card.Header>
+                <Card.Header as={Link} to={`/users/${username}`}>{username}</Card.Header>
                 <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
                 <Card.Description>{body}</Card.Description>
               </Card.Content>
@@ -117,7 +118,7 @@ const SinglePost = (props) => {
                   {user && user.username === comment.username && (
                     <DeleteButton postId={id} commentId={comment.id} />
                   )}
-                  <Card.Header>{comment.username}</Card.Header>
+                  <Card.Header as={Link} to={`/users/${comment.username}`}>{comment.username}</Card.Header>
                   <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
                   <Card.Description>{comment.body}</Card.Description>
                 </Card.Content>
