@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Card, Icon, Image, List } from 'semantic-ui-react';
+import moment from 'moment';
 
 import { AuthContext } from '../context/auth.js';
-import { FETCH_USER_QUERY } from '../utils/graphql.js';
+import { FETCH_USER_QUERY, FETCH_USER_POSTS } from '../utils/graphql.js';
 
 const User = (props) => {
   const username = props.match.params.username;
 
   const { data: {getUser: userData} = {} } = useQuery(FETCH_USER_QUERY, {
+    variables: { username }
+  });
+
+  const { data: {getUserPosts: userPosts} = {} } = useQuery(FETCH_USER_POSTS, {
     variables: { username }
   });
 
@@ -58,7 +63,36 @@ const User = (props) => {
     )
   }
 
-  return userCard;
+  let posts;
+  if (!userPosts) {
+    posts = <p>Loading {username}'s posts</p>
+  } else {
+    posts = (
+      userPosts.map(post => (
+        <Card fluid key={post.id}>
+          <Card.Content>
+            <Card.Header>{post.username}</Card.Header>
+            <Card.Meta>{moment(post.createdAt).fromNow()}</Card.Meta>
+            <Card.Description>{post.body}</Card.Description>
+          </Card.Content>
+        </Card>
+      ))
+    )
+  }
+
+  return (
+    <div>
+      <div className='user-profile'>
+        {userCard}
+      </div>
+      <br/>
+      <br/>
+      <div className='user-posts'>
+        <h2>{username}'s Posts</h2>
+        {posts}
+      </div>
+    </div>
+  )
 }
 
 export default User;

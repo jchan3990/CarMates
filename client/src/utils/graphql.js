@@ -46,6 +46,19 @@ export const FETCH_POST_QUERY = gql`
   }
 `;
 
+export const FETCH_USER_POSTS = gql`
+  query($username: String!) {
+    getUserPosts(username: $username) {
+      id
+      username
+      body
+      createdAt
+      commentCount
+      likeCount
+    }
+  }
+`
+
 export const FETCH_USER_QUERY = gql`
 query($username: String!) {
   getUser(username: $username) {
