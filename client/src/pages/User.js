@@ -6,6 +6,8 @@ import moment from 'moment';
 import { AuthContext } from '../context/auth.js';
 import { FETCH_USER_QUERY, FETCH_USER_POSTS } from '../utils/graphql.js';
 
+import LikeButton from '../components/LikeButton.jsx';
+
 const User = (props) => {
   const username = props.match.params.username;
 
@@ -75,6 +77,11 @@ const User = (props) => {
             <Card.Meta>{moment(post.createdAt).fromNow()}</Card.Meta>
             <Card.Description>{post.body}</Card.Description>
           </Card.Content>
+          <hr/>
+            <Card.Content extra>
+              <Icon name='heart' id='user-prof-likes' />
+              <p id='user-prof-like-count'>{post.likeCount}</p>
+            </Card.Content>
         </Card>
       ))
     )
@@ -88,7 +95,7 @@ const User = (props) => {
       <br/>
       <br/>
       <div className='user-posts'>
-        <h2>{username}'s Posts</h2>
+        <h2>{username}'s Top Posts</h2>
         {posts}
       </div>
     </div>
