@@ -19,7 +19,7 @@ const MenuBar = () => {
         active
         onClick={handleItemClick}
         as={Link}
-        to="/"
+        to={`/users/${user.username}`}
       />
       <Menu.Menu position='right'>
       <Menu.Item
