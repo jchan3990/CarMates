@@ -35,11 +35,13 @@ module.exports = gql`
     carYear: String
     carMake: String
     carModel: String
-    friends: [Friend]!
+    followers: [Follower]!
+    followerCount: Int!
   }
-  type Friend {
+  type Follower {
     id: ID!
     username: String!
+    createdAt: Date!
   }
   input RegisterInput {
     email: String!
@@ -57,6 +59,7 @@ module.exports = gql`
     getPost(postId: ID!): Post
     getUserPosts(username: String!): [Post]
     getUser(username: String!): User
+    getUserFollowers(username: String!): [Follower]
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
@@ -66,6 +69,7 @@ module.exports = gql`
     createComment(postId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
     likePost(postId: ID!): Post!
+    followUser(username: String!): User!
   }
   type Subscription {
     newPost: Post!

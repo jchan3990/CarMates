@@ -7,14 +7,17 @@ module.exports = {
     likeCount: (parent) => parent.likes.length,
     commentCount: (parent) => parent.comments.length
   },
+  User: {
+    followerCount: (parent) => parent.followers.length
+  },
   Query: {
     ...postsResolvers.Query,
-    ...usersResolvers.Query
+    ...usersResolvers.Query,
   },
   Mutation: {
     ...usersResolvers.Mutation,
     ...postsResolvers.Mutation,
-    ...commentsResolvers.Mutation
+    ...commentsResolvers.Mutation,
   },
   Subscription: {
     ...postsResolvers.Subscription

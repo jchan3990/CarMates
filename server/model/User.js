@@ -9,7 +9,13 @@ const userSchema = new Schema({
   avatar: String,
   carYear: String,
   carMake: String,
-  carModel: String
+  carModel: String,
+  followers: [
+    {
+      createdAt: Date,
+      username: String,
+    }
+  ]
 });
 
 module.exports = model('User', userSchema);

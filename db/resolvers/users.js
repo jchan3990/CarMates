@@ -5,6 +5,7 @@ const { UserInputError } = require('apollo-server');
 const { validateRegisterInput, validateLoginInput } = require('../../util/validators.js')
 const { SECRET_KEY } = require('../../config.js');
 const User = require('../../server/model/User.js');
+const checkAuth = require('../../util/check-auth.js')
 
 const generateToken = user => {
   return jwt.sign(
@@ -25,6 +26,18 @@ module.exports = {
         const user = await User.findOne({"username": username})
         if (user) {
           return user;
+        } else {
+          throw new Error('User not found');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    getUserFollowers: async (_, { username }) => {
+      try {
+        const user = await User.findOne({ 'username': username });
+        if (user) {
+          return user.followers;
         } else {
           throw new Error('User not found');
         }
@@ -106,6 +119,28 @@ module.exports = {
         id: res._id,
         token
       };
+    },
+    followUser: async (_, { username }, context) => {
+      const { currUser } = checkAuth(context);
+      const user = await User.findOne({ 'username': username });
+
+      if (user) {
+        if (user.followers.find(follower => follower.username === currUser)) {
+          // Already following --> stop following
+          user.followers = user.followers.filter(follower => follower.username !== currUser);
+        } else {
+          // Not following --> follow
+          user.followers.push({
+            currUser,
+            createdAt: new Date()
+          })
+        }
+
+        await user.save();
+        return user;
+      } else {
+        throw new Error('User not found');
+      }
     }
   }
 }
