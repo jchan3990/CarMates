@@ -121,23 +121,23 @@ module.exports = {
       };
     },
     followUser: async (_, { username }, context) => {
-      const { currUser } = checkAuth(context);
-      const user = await User.findOne({ 'username': username });
+      const currUser = checkAuth(context);
+      const toFollow = await User.findOne({ 'username': username });
 
-      if (user) {
-        if (user.followers.find(follower => follower.username === currUser)) {
+      if (toFollow) {
+        if (toFollow.followers.find(follower => follower.username === currUser.username)) {
           // Already following --> stop following
-          user.followers = user.followers.filter(follower => follower.username !== currUser);
+          toFollow.followers = toFollow.followers.filter(follower => follower.username !== currUser.username);
         } else {
           // Not following --> follow
-          user.followers.push({
-            currUser,
+          toFollow.followers.push({
+            username: currUser.username,
             createdAt: new Date()
           })
         }
 
-        await user.save();
-        return user;
+        await toFollow.save();
+        return toFollow;
       } else {
         throw new Error('User not found');
       }
