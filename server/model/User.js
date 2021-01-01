@@ -15,6 +15,12 @@ const userSchema = new Schema({
       createdAt: Date,
       username: String,
     }
+  ],
+  following: [
+    {
+      createdAt: Date,
+      username: String,
+    }
   ]
 });
 

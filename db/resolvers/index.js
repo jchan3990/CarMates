@@ -8,7 +8,8 @@ module.exports = {
     commentCount: (parent) => parent.comments.length
   },
   User: {
-    followerCount: (parent) => parent.followers.length
+    followerCount: (parent) => parent.followers.length,
+    followingCount: (parent) => parent.following.length
   },
   Query: {
     ...postsResolvers.Query,

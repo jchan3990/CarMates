@@ -37,8 +37,15 @@ module.exports = gql`
     carModel: String
     followers: [Follower]!
     followerCount: Int!
+    following: [Following]!
+    followingCount: Int!
   }
   type Follower {
+    id: ID!
+    username: String!
+    createdAt: Date!
+  }
+  type Following {
     id: ID!
     username: String!
     createdAt: Date!
