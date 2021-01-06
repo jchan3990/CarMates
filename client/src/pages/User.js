@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Card, Icon, Image, List } from 'semantic-ui-react';
+import { Button, Card, Icon, Image, List } from 'semantic-ui-react';
 import moment from 'moment';
 
 import { AuthContext } from '../context/auth.js';
@@ -9,6 +9,8 @@ import { FETCH_USER_QUERY, FETCH_USER_POSTS } from '../utils/graphql.js';
 import LikeButton from '../components/LikeButton.jsx';
 
 const User = (props) => {
+  const context = useContext(AuthContext);
+  const currUser = context.user.username;
   const username = props.match.params.username;
 
   const { data: {getUser: userData} = {} } = useQuery(FETCH_USER_QUERY, {
@@ -28,12 +30,22 @@ const User = (props) => {
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
 
-    console.log(followers)
+    let hasFollower = followers.find(follower => follower.username === currUser)
+    const followUnfollowBtnText = hasFollower ? 'Unfollow' : 'Follow';
+
     userCard = (
       <Card>
         <Image src={avatar} wrapped ui={false} />
         <Card.Content>
-          <Card.Header>{username}</Card.Header>
+          <Card.Header>{username}
+            <Button
+              primary
+              size="mini"
+              id="followUnfollowBtn"
+            >
+              {followUnfollowBtnText}
+            </Button>
+          </Card.Header>
           <Card.Meta>
             <span className='date'>Joined in {joined}</span>
           </Card.Meta>
@@ -62,7 +74,7 @@ const User = (props) => {
             {followerCount} Followers
           </a>
           <a className="followingCount">
-            <Icon name='user' />
+            <Icon name='users' />
             {followingCount} Following
           </a>
         </Card.Content>

@@ -9,6 +9,10 @@
   margin-left: 45px;
 }
 
+#followUnfollowBtn {
+  margin-left: 10px;
+}
+
 .form-container {
   width: 400px;
   margin: auto;
