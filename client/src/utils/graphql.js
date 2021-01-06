@@ -71,6 +71,14 @@ query($username: String!) {
     carYear
     carMake
     carModel
+    followers {
+      username
+    }
+    followerCount
+    following {
+      username
+    }
+    followingCount
   }
 }
 `;

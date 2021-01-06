@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.followingCount {
+  margin-left: 45px;
+}
+
 .form-container {
   width: 400px;
   margin: auto;

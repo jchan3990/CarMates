@@ -23,11 +23,12 @@ const User = (props) => {
   if (!userData) {
     userCard = <p>Fetching user profile</p>;
   } else {
-    const { id, createdAt, username, email, avatar, carYear, carMake, carModel, zipCode } = userData;
+    const { id, createdAt, username, email, avatar, carYear, carMake, carModel, zipCode, followers, followerCount, following, followingCount } = userData;
     let joined = new Date(createdAt);
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
 
+    console.log(followers)
     userCard = (
       <Card>
         <Image src={avatar} wrapped ui={false} />
@@ -56,9 +57,13 @@ const User = (props) => {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a>
+          <a className="followerCount">
             <Icon name='user' />
-            22 Friends
+            {followerCount} Followers
+          </a>
+          <a className="followingCount">
+            <Icon name='user' />
+            {followingCount} Following
           </a>
         </Card.Content>
       </Card>
