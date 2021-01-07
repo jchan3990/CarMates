@@ -5,12 +5,11 @@ import moment from 'moment';
 
 import { AuthContext } from '../context/auth.js';
 import { FETCH_USER_QUERY, FETCH_USER_POSTS } from '../utils/graphql.js';
-
-import LikeButton from '../components/LikeButton.jsx';
+import FollowButton from '../components/FollowButton.jsx';
 
 const User = (props) => {
   const context = useContext(AuthContext);
-  const currUser = context.user.username;
+  const currUser = context.user ? context.user.username : context.user;
   const username = props.match.params.username;
 
   const { data: {getUser: userData} = {} } = useQuery(FETCH_USER_QUERY, {
@@ -30,21 +29,15 @@ const User = (props) => {
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
 
-    let hasFollower = followers.find(follower => follower.username === currUser)
-    const followUnfollowBtnText = hasFollower ? 'Unfollow' : 'Follow';
+    // let hasFollower = followers.find(follower => follower.username === currUser)
+    // const followUnfollowBtnText = hasFollower ? 'Unfollow' : 'Follow';
 
     userCard = (
       <Card>
         <Image src={avatar} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{username}
-            <Button
-              primary
-              size="mini"
-              id="followUnfollowBtn"
-            >
-              {followUnfollowBtnText}
-            </Button>
+            <FollowButton currUser={currUser} user={username} followers={followers} followerCount={followerCount} />
           </Card.Header>
           <Card.Meta>
             <span className='date'>Joined in {joined}</span>

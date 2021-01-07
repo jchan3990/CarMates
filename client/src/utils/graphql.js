@@ -212,3 +212,18 @@ export const CREATE_COMMENT_MUTATION = gql`
     }
   }
   `;
+
+  export const FOLLOW_USER_MUTATION = gql`
+  mutation followUser($username: String!) {
+    followUser(username: $username) {
+      followers {
+        username
+      }
+      followerCount
+      following {
+        username
+      }
+      followingCount
+    }
+  }
+  `
