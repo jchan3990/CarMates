@@ -29,9 +29,6 @@ const User = (props) => {
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
 
-    // let hasFollower = followers.find(follower => follower.username === currUser)
-    // const followUnfollowBtnText = hasFollower ? 'Unfollow' : 'Follow';
-
     userCard = (
       <Card>
         <Image src={avatar} wrapped ui={false} />

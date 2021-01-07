@@ -170,7 +170,8 @@ export const LIKE_POST_MUTATION = gql`
     likePost(postId: $postId) {
       id
       likes {
-        id username
+        id
+        username
       }
       likeCount
     }
@@ -224,6 +225,15 @@ export const CREATE_COMMENT_MUTATION = gql`
         username
       }
       followingCount
+    }
+  }
+  `
+
+  export const GET_FOLLOWERS_QUERY = gql`
+  query getUserFollowers($username: String!) {
+    getUserFollowers(username: $username) {
+      id
+      username
     }
   }
   `

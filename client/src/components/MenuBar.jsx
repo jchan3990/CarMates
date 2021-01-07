@@ -31,6 +31,8 @@ const MenuBar = () => {
       <Menu.Menu position='right'>
       <Menu.Item
           name='logout'
+          as={Link}
+          to='/'
           onClick={logout}
         />
       </Menu.Menu>

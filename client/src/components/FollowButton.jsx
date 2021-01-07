@@ -14,30 +14,32 @@ const FollowButton = ({ currUser, user, followers, followerCount }) => {
     } else {
       setFollowed(false);
     }
-  }, [currUser, followerCount]);
+  }, []);
 
   const [clickFollow] = useMutation(FOLLOW_USER_MUTATION, {
-    variables: { username: user}
+    variables: { username: user }
   })
 
   const followBtn = currUser ? (
-    followed ? (
-      <Button
-        primary
-        size="mini"
-        id="followUnfollowBtn"
-      >
-        Unfollow
-      </Button>
-    ) :(
-      <Button
-        primary
-        size="mini"
-        id="followUnfollowBtn"
-      >
-        Follow
-      </Button>
-    )
+    currUser !== user ? (
+      followed ? (
+        <Button
+          primary
+          size="mini"
+          id="followUnfollowBtn"
+        >
+          Unfollow
+        </Button>
+      ) : (
+        <Button
+          primary
+          size="mini"
+          id="followUnfollowBtn"
+        >
+          Follow
+        </Button>
+      )
+    ) : (null)
   ) : (
     <Button
       as={Link} to='/login'
