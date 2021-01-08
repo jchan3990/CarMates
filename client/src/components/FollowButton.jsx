@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Button, Icon, Label } from 'semantic-ui-react';
 
-import { FOLLOW_USER_MUTATION } from '../utils/graphql.js'
+import { FOLLOW_USER_MUTATION, FETCH_USER_QUERY } from '../utils/graphql.js'
 
-const FollowButton = ({ currUser, user, followers, followerCount }) => {
+const FollowButton = ({ currUser, user, followers }) => {
   const [followed, setFollowed] = useState(false);
 
   useEffect(() => {
-    if (currUser && followers.find(follower => follower.username === currUser)) {
-      setFollowed(true);
-    } else {
-      setFollowed(false);
-    }
-  }, []);
+    if (currUser && followers.find(follower => follower.username === currUser.username)) setFollowed(true);
+    else setFollowed(false);
+  }, [currUser, followers])
 
   const [clickFollow] = useMutation(FOLLOW_USER_MUTATION, {
     variables: { username: user }
   })
 
+  function handleFollow() {
+    clickFollow();
+    let btnStatus = followed ? false : true;
+    setFollowed(btnStatus);
+  }
+
   const followBtn = currUser ? (
-    currUser !== user ? (
+    currUser.username !== user ? (
       followed ? (
         <Button
           primary
@@ -52,7 +55,7 @@ const FollowButton = ({ currUser, user, followers, followerCount }) => {
   )
 
   return (
-    <span onClick={clickFollow}>
+    <span onClick={handleFollow}>
       {followBtn}
     </span>
   )

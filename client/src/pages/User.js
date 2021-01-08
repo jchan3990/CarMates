@@ -28,13 +28,14 @@ const User = (props) => {
     let joined = new Date(createdAt);
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
+    const currFollowing = followers.find(follower => follower.username === currUser);
 
     userCard = (
       <Card>
         <Image src={avatar} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{username}
-            <FollowButton currUser={currUser} user={username} followers={followers} followerCount={followerCount} />
+            <FollowButton currUser={{username: currUser}} user={username} followers={followers} />
           </Card.Header>
           <Card.Meta>
             <span className='date'>Joined in {joined}</span>

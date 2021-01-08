@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
 
 import { AuthContext } from '../context/auth.js';
+import FollowButton from './FollowButton.jsx';
 import LikeButton from './LikeButton.jsx';
 import DeleteButton from './DeleteButton.jsx';
 import MyPopup from '../utils/MyPopup.js';
@@ -36,8 +37,9 @@ const PostCard = ({ post: { body, createdAt, id, username, likeCount, commentCou
           size='small'
           src={userAvatar}
         />
-        <Card.Header as={Link} to={`/users/${username}`}>{username}</Card.Header>
-        <Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
+        <Card.Header style={{display: 'inline'}} as={Link} to={`/users/${username}`}>{username}</Card.Header>
+          <FollowButton style={{display: 'inline'}} currUser={user} user={username} followers={userData.followers}/>
+        <Card.Meta style={{display: 'block'}} as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
         <Card.Description as={Link} to={`/posts/${id}`} style={{display: 'block'}}>
           {body}
         </Card.Description>
