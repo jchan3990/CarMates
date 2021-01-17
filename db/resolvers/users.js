@@ -33,6 +33,18 @@ module.exports = {
         throw new Error(err);
       }
     },
+    getAllUsers: async () => {
+      try {
+        const users = await User.find().limit(20);
+        if (users) {
+          return users;
+        } else {
+          throw new Error('Failed to get users');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
     getUserFollowers: async (_, { username }) => {
       try {
         const user = await User.findOne({ 'username': username });

@@ -239,3 +239,12 @@ export const CREATE_COMMENT_MUTATION = gql`
     }
   }
   `
+
+  export const GET_ALL_USERS_QUERY = gql`
+  query getAllUsers {
+    getAllUsers {
+      id
+      username
+    }
+  }
+  `
