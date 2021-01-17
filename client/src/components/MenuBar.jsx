@@ -46,7 +46,7 @@ const MenuBar = () => {
         to="/"
       />
       <Menu.Menu position='right'>
-      <SearchBar />
+      <SearchBar handleSearchTerm={handleSearchTerm}/>
       {searchTerm &&
         <Names names={dynamicSearch()} />
       }
