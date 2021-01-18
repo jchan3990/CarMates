@@ -43,6 +43,10 @@
   border-collapse: collapse;
   justify-self: start;
   padding: 5px;
+  width: 100%;
+}
+#name:hover {
+  background: rgb(184, 184, 184);
 }
 
 .ui.teal.button:focus, .ui.teal.buttons .button:focus {
