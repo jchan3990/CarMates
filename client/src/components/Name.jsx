@@ -5,7 +5,9 @@ import { useQuery } from '@apollo/react-hooks';
 const Name = ({ name }) => {
 
   return (
-    <Link id='name' to={`/users/${name}`}>{name}</Link>
+    <div>
+      <Link id='name' to={`/users/${name}`}>{name}</Link>
+    </div>
   )
 }
 
