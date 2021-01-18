@@ -18,6 +18,33 @@
   margin: auto;
 }
 
+#dynamic-search {
+  margin-top: 4px;
+  width: 100%;
+}
+
+#names-container {
+  position: absolute;
+  background: black;
+  z-index: 100;
+  width: 230px;
+}
+
+#names-list {
+  display: grid;
+  margin: 0px;
+  padding: 0px;
+}
+
+#name {
+  color: white;
+  display: block;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  justify-self: start;
+  padding: 5px;
+}
+
 .ui.teal.button:focus, .ui.teal.buttons .button:focus {
   background-color: #00b5ad !important;
 }

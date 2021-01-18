@@ -1,9 +1,10 @@
 import React from 'react';
 
 const Name = ({ name }) => {
-  console.log(name);
   return (
-    <span>{name}</span>
+    <div>
+      <span id='name'>{name}</span>
+    </div>
   )
 }
 

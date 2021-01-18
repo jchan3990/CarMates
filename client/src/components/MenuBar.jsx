@@ -46,10 +46,12 @@ const MenuBar = () => {
         to="/"
       />
       <Menu.Menu position='right'>
-      <SearchBar handleSearchTerm={handleSearchTerm}/>
-      {searchTerm &&
-        <Names names={dynamicSearch()} />
-      }
+      <div>
+        <SearchBar handleSearchTerm={handleSearchTerm} />
+        {searchTerm &&
+          <Names names={dynamicSearch()} />
+        }
+      </div>
       <Menu.Item
           name='logout'
           as={Link}
@@ -68,10 +70,12 @@ const MenuBar = () => {
         to="/"
       />
       <Menu.Menu position='right'>
+      <div id='dynamic-search'>
         <SearchBar handleSearchTerm={handleSearchTerm} />
         {searchTerm &&
           <Names names={dynamicSearch()} />
         }
+      </div>
         <Menu.Item
           name='login'
           active={activeItem === 'login'}
