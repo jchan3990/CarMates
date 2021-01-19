@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Input } from 'semantic-ui-react';
 import { useLocation } from 'react-router-dom';
 
 const SearchBar = ({ handleSearchTerm, currPath, updateLocation }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-
   let location = useLocation();
   let locationPath = location.pathname
 

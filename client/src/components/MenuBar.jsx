@@ -37,6 +37,7 @@ const MenuBar = () => {
 
   const updateLocation = (loc) => {
     setLocationPath(loc);
+    setSearchTerm('');
   }
 
   const { data: { getAllUsers: allUsers }= {} } = useQuery(GET_ALL_USERS_QUERY)
