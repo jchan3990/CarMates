@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 const Name = ({ name }) => {
+  const [showNames, setShowNames] = useState(true);
+
+  const handleClick = () => {
+    setShowNames(false);
+  }
 
   return (
     <div>
-      <Link id='name' to={`/users/${name}`}>{name}</Link>
+    {showNames &&
+    <Link id='name' to={`/users/${name}`} onClick={handleClick}>{name}</Link>
+    }
     </div>
   )
 }
