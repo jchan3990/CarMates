@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 const Name = ({ name }) => {
@@ -11,9 +11,9 @@ const Name = ({ name }) => {
 
   return (
     <div>
-    {showNames &&
-    <Link id='name' to={`/users/${name}`} onClick={handleClick}>{name}</Link>
-    }
+      {showNames &&
+        <Link id='name' to={`/users/${name}`} onClick={handleClick}>{name}</Link>
+      }
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks'
 
 import { AuthContext } from '../context/auth.js';
@@ -11,6 +11,9 @@ import Names from './Names.jsx';
 const MenuBar = () => {
   const [activeItem, setActiveItem] = useState(path);
   const [searchTerm, setSearchTerm] = useState('');
+
+  let Location = useLocation();
+  const [locationPath, setLocationPath] = useState(location.pathname);
 
   const { user, logout } = useContext(AuthContext);
   const node = useRef();
@@ -30,6 +33,10 @@ const MenuBar = () => {
     } else {
       setSearchTerm('');
     }
+  }
+
+  const updateLocation = (loc) => {
+    setLocationPath(loc);
   }
 
   const { data: { getAllUsers: allUsers }= {} } = useQuery(GET_ALL_USERS_QUERY)
@@ -64,7 +71,7 @@ const MenuBar = () => {
       />
       <Menu.Menu position='right'>
       <div id='dynamic-search' ref={node}>
-        <SearchBar handleSearchTerm={handleSearchTerm} />
+        <SearchBar handleSearchTerm={handleSearchTerm} currPath={locationPath} updateLocation={updateLocation} />
         {searchTerm &&
           <Names names={dynamicSearch()} />
         }
@@ -88,7 +95,7 @@ const MenuBar = () => {
       />
       <Menu.Menu position='right'>
       <div id='dynamic-search' ref={node}>
-        <SearchBar handleSearchTerm={handleSearchTerm} />
+        <SearchBar handleSearchTerm={handleSearchTerm} currPath={locationPath} updateLocation={updateLocation} />
         {searchTerm &&
           <Names names={dynamicSearch()} />
         }
