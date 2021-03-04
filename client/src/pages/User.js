@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Button, Card, Icon, Image, List } from 'semantic-ui-react';
 import moment from 'moment';
@@ -6,6 +6,8 @@ import moment from 'moment';
 import { AuthContext } from '../context/auth.js';
 import { FETCH_USER_QUERY, FETCH_USER_POSTS } from '../utils/graphql.js';
 import FollowButton from '../components/FollowButton.jsx';
+import client from '../utils/googleMapsClient.js';
+import Map from '../components/Map.jsx';
 
 const User = (props) => {
   const context = useContext(AuthContext);
@@ -24,7 +26,7 @@ const User = (props) => {
   if (!userData) {
     userCard = <p>Fetching user profile</p>;
   } else {
-    const { id, createdAt, username, email, avatar, carYear, carMake, carModel, zipCode, followers, followerCount, following, followingCount } = userData;
+    const { id, createdAt, username, email, avatar, carYear, carMake, carModel, city, state, country, followers, followerCount, following, followingCount } = userData;
     let joined = new Date(createdAt);
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
@@ -44,11 +46,11 @@ const User = (props) => {
           <List>
             <List.Item>
               <List.Icon name='car' />
-              <List.Content>{carYear} {carMake} {carModel}</List.Content>
+              <List.Content>{`${carYear} ${carMake} ${carModel}`}</List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name='marker' />
-              <List.Content>{zipCode}</List.Content>
+              <List.Content>{`${city}, ${state}, ${country}`}</List.Content>
             </List.Item>
             <List.Item>
               <List.Icon name='mail' />
@@ -96,9 +98,10 @@ const User = (props) => {
   }
 
   return (
-    <div>
+    <div className='user-profile-container'>
       <div className='user-profile'>
         {userCard}
+        <Map />
       </div>
       <br/>
       <br/>

@@ -53,7 +53,24 @@
   background-color: #00b5ad !important;
 }
 
+.user-profile-container {
+  position: relative;
+}
+
+.user-profile {
+  width: 290px;
+  height: 400px;
+}
+
 #user-prof-likes, #user-prof-like-count {
   display: inline-block;
+}
+
+.map-container {
+  position: absolute;
+  width: 600px;
+  height: 400px;
+  top: 0;
+  right: 0;
 }
 

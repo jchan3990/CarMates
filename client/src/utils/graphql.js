@@ -67,7 +67,9 @@ query($username: String!) {
     email
     avatar
     createdAt
-    zipCode
+    city
+    state
+    country
     carYear
     carMake
     carModel
@@ -107,7 +109,9 @@ export const REGISTER_USER = gql`
     $username: String!
     $password: String!
     $confirmPassword: String!
-    $zipCode: String
+    $city: String
+    $state: String
+    $country: String
     $avatar: String
     $carYear: String
     $carMake: String
@@ -119,7 +123,9 @@ export const REGISTER_USER = gql`
         username: $username
         password: $password
         confirmPassword: $confirmPassword
-        zipCode: $zipCode
+        city: $city
+        state: $state
+        country: $country
         avatar: $avatar
         carYear: $carYear
         carMake: $carMake
@@ -131,7 +137,9 @@ export const REGISTER_USER = gql`
       username
       createdAt
       token
-      zipCode
+      city
+      state
+      country
       avatar
       carYear
       carMake

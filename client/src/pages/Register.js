@@ -15,7 +15,9 @@ const Register = (props) => {
     username: '',
     password: '',
     confirmPassword: '',
-    zipCode: '',
+    city: '',
+    state: '',
+    country: '',
     avatar: '',
     carYear: '',
     carMake: '',
@@ -80,11 +82,29 @@ const Register = (props) => {
         />
         <Form.Input
           type="text"
-          label="Zipcode"
-          placeholder="Zipcode..."
-          name="zipCode"
-          value={values.zipCode}
-          error={errors.zipCode ? true : false}
+          label="City"
+          placeholder="City..."
+          name="city"
+          value={values.city}
+          error={errors.city ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          type="text"
+          label="State"
+          placeholder="Eg. CA (if applicable)..."
+          name="state"
+          value={values.state}
+          error={errors.state ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          type="text"
+          label="Country"
+          placeholder="Country..."
+          name="country"
+          value={values.country}
+          error={errors.country ? true : false}
           onChange={onChange}
         />
         <Form.Input

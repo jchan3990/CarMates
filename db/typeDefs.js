@@ -30,7 +30,9 @@ module.exports = gql`
     token: String!
     username: String!
     createdAt: Date!
-    zipCode: String
+    city: String
+    state: String
+    country: String
     avatar: String
     carYear: String
     carMake: String
@@ -55,7 +57,9 @@ module.exports = gql`
     username: String!
     password: String!
     confirmPassword: String!
-    zipCode: String
+    city: String
+    state: String
+    country: String
     avatar: String
     carYear: String
     carMake: String
