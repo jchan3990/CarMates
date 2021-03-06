@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 import { gMapsKey } from '../../../config.js';
 
-const Map = () => {
+const Map = ({ geocode }) => {
   const defaultCenter = {
     lat: 37.334160,
     lng: -121.888682
