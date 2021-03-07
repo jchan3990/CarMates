@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { UserInputError } = require('apollo-server');
+const {Client} = require("@googlemaps/google-maps-services-js");
+const axios = require('axios');
 
 const { validateRegisterInput, validateLoginInput } = require('../../util/validators.js')
 const { SECRET_KEY, gMapsKey } = require('../../config.js');

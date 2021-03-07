@@ -33,7 +33,6 @@ module.exports = gql`
     city: String
     state: String
     country: String
-    geocode: String
     avatar: String
     carYear: String
     carMake: String
