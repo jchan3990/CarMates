@@ -70,6 +70,8 @@ query($username: String!) {
     city
     state
     country
+    lat
+    long
     carYear
     carMake
     carModel

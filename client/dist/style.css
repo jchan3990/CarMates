@@ -74,3 +74,8 @@
   right: 0;
 }
 
+.ui.card {
+  height: 400px;
+  max-height: 400px;
+}
+

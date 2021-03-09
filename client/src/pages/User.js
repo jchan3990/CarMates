@@ -28,58 +28,55 @@ const User = (props) => {
   if (!userData) {
     userCard = <p>Fetching user profile</p>;
   } else {
-    const { id, createdAt, username, email, avatar, carYear, carMake, carModel, city, state, country, followers, followerCount, following, followingCount } = userData;
+    const { id, createdAt, username, email, avatar, carYear, carMake, carModel, city, state, country, lat, long, followers, followerCount, following, followingCount } = userData;
     let joined = new Date(createdAt);
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
     const currFollowing = followers.find(follower => follower.username === currUser);
 
-    if (!userCity || !userState || !userCountry) {
-      setUserCity(city);
-      setUserState(state);
-      setUserCountry(country);
-    }
-
     userCard = (
-      <Card>
-        <Image src={avatar} wrapped ui={false} />
-        <Card.Content>
-          <Card.Header>{username}
-            <FollowButton currUser={{username: currUser}} user={username} followers={followers} />
-          </Card.Header>
-          <Card.Meta>
-            <span className='date'>Joined in {joined}</span>
-          </Card.Meta>
-          <Card.Description>
-          <List>
-            <List.Item>
-              <List.Icon name='car' />
-              <List.Content>{`${carYear} ${carMake} ${carModel}`}</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Icon name='marker' />
-              <List.Content>{`${city}, ${state}, ${country}`}</List.Content>
-            </List.Item>
-            <List.Item>
-              <List.Icon name='mail' />
-              <List.Content>
-                <a href={emailLink}>{email}</a>
-              </List.Content>
-            </List.Item>
-          </List>
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <a className="followerCount">
-            <Icon name='user' />
-            {followerCount} Followers
-          </a>
-          <a className="followingCount">
-            <Icon name='users' />
-            {followingCount} Following
-          </a>
-        </Card.Content>
-      </Card>
+      <>
+        <Card>
+          <Image src={avatar} wrapped ui={false} />
+          <Card.Content>
+            <Card.Header>{username}
+              <FollowButton currUser={{username: currUser}} user={username} followers={followers} />
+            </Card.Header>
+            <Card.Meta>
+              <span className='date'>Joined in {joined}</span>
+            </Card.Meta>
+            <Card.Description>
+            <List>
+              <List.Item>
+                <List.Icon name='car' />
+                <List.Content>{`${carYear} ${carMake} ${carModel}`}</List.Content>
+              </List.Item>
+              <List.Item>
+                <List.Icon name='marker' />
+                <List.Content>{`${city}, ${state}, ${country}`}</List.Content>
+              </List.Item>
+              <List.Item>
+                <List.Icon name='mail' />
+                <List.Content>
+                  <a href={emailLink}>{email}</a>
+                </List.Content>
+              </List.Item>
+            </List>
+            </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <a className="followerCount">
+              <Icon name='user' />
+              {followerCount} Followers
+            </a>
+            <a className="followingCount">
+              <Icon name='users' />
+              {followingCount} Following
+            </a>
+          </Card.Content>
+        </Card>
+        <Map lat={lat} long={long} />
+      </>
     )
   }
 
@@ -109,7 +106,6 @@ const User = (props) => {
     <div className='user-profile-container'>
       <div className='user-profile'>
         {userCard}
-        {userCity && userState && userCountry && <Map city={userCity} state={userState} country={userCountry} />}
       </div>
       <br/>
       <br/>
