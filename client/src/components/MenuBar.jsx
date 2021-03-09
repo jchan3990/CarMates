@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks'
 
 import { AuthContext } from '../context/auth.js';
-import { GET_ALL_USERS_QUERY } from '../utils/graphql.js';
+import { FETCH_ALL_USERS_QUERY } from '../utils/graphql.js';
 import SearchBar from './SearchBar.jsx';
 import Names from './Names.jsx';
 
@@ -40,7 +40,7 @@ const MenuBar = () => {
     setSearchTerm('');
   }
 
-  const { data: { getAllUsers: allUsers }= {} } = useQuery(GET_ALL_USERS_QUERY)
+  const { data: { getAllUsers: allUsers }= {} } = useQuery(FETCH_ALL_USERS_QUERY)
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
@@ -70,6 +70,13 @@ const MenuBar = () => {
         as={Link}
         to="/"
       />
+      <Menu.Item
+        name='map'
+        active={activeItem === 'map'}
+        onClick={handleItemClick}
+        as={Link}
+        to="/map"
+      />
       <Menu.Menu position='right'>
       <div id='dynamic-search' ref={node}>
         <SearchBar handleSearchTerm={handleSearchTerm} currPath={locationPath} updateLocation={updateLocation} />
@@ -93,6 +100,13 @@ const MenuBar = () => {
         onClick={handleItemClick}
         as={Link}
         to="/"
+      />
+      <Menu.Item
+        name='map'
+        active={activeItem === 'map'}
+        onClick={handleItemClick}
+        as={Link}
+        to="/map"
       />
       <Menu.Menu position='right'>
       <div id='dynamic-search' ref={node}>

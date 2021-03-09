@@ -59,6 +59,34 @@ export const FETCH_USER_POSTS = gql`
   }
 `
 
+export const FETCH_ALL_USERS_QUERY = gql`
+{
+  getAllUsers {
+    id
+    username
+    email
+    avatar
+    createdAt
+    city
+    state
+    country
+    lat
+    long
+    carYear
+    carMake
+    carModel
+    followers {
+      username
+    }
+    followerCount
+    following {
+      username
+    }
+    followingCount
+  }
+}
+`
+
 export const FETCH_USER_QUERY = gql`
 query($username: String!) {
   getUser(username: $username) {
@@ -248,15 +276,6 @@ export const CREATE_COMMENT_MUTATION = gql`
   export const GET_FOLLOWERS_QUERY = gql`
   query getUserFollowers($username: String!) {
     getUserFollowers(username: $username) {
-      id
-      username
-    }
-  }
-  `
-
-  export const GET_ALL_USERS_QUERY = gql`
-  query getAllUsers {
-    getAllUsers {
       id
       username
     }

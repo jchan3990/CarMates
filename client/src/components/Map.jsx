@@ -4,7 +4,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import client from '../utils/googleMapsClient.js';
 import { gMapsKey } from '../../../config.js';
 
-const Map = ({ lat, long }) => {
+const Map = ({ lat, long, zoom }) => {
   const defaultCenter = {
     lat: 37.334160,
     lng: -121.888682,
@@ -14,7 +14,7 @@ const Map = ({ lat, long }) => {
   (lat !== undefined || long !== undefined) ? userCenter = {'lat': lat, 'lng': long} : userCenter = defaultCenter;
 
   const style = {
-    height: "400px",
+    height: "100%",
     width: "100%",
   }
 
@@ -24,7 +24,7 @@ const Map = ({ lat, long }) => {
         googleMapsApiKey={gMapsKey}>
           <GoogleMap
             mapContainerStyle={style}
-            zoom={10}
+            zoom={zoom}
             center={userCenter}
           >
             <Marker position={userCenter} />

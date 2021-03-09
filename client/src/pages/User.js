@@ -12,9 +12,6 @@ const User = (props) => {
   const context = useContext(AuthContext);
   const currUser = context.user ? context.user.username : context.user;
   const username = props.match.params.username;
-  const [userCity, setUserCity] = useState(null);
-  const [userState, setUserState] = useState(null);
-  const [userCountry, setUserCountry] = useState(null);
 
   const { data: {getUser: userData} = {} } = useQuery(FETCH_USER_QUERY, {
     variables: { username }
@@ -75,7 +72,7 @@ const User = (props) => {
             </a>
           </Card.Content>
         </Card>
-        <Map lat={lat} long={long} />
+        <Map lat={lat} long={long} zoom={10} />
       </>
     )
   }

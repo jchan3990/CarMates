@@ -10,6 +10,7 @@ import Login from '../pages/Login.js';
 import Register from '../pages/Register.js';
 import SinglePost from '../pages/SinglePost.js';
 import User from '../pages/User.js';
+import Map from '../pages/MapPage.js';
 
 import { AuthProvider } from '../context/auth.js';
 import AuthRoute from '../utils/AuthRoute.js';
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path='/' component={Feed} />
           <AuthRoute exact path='/login' component={Login} />
           <AuthRoute exact path='/register' component={Register} />
+          <Route exact path='/map' component={Map} />
           <Route exact path='/users/:username' component={User} />
           <Route exact path='/posts/:postId' component={SinglePost} />
         </Container>
