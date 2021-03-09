@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
+import client from '../utils/googleMapsClient.js';
 import { gMapsKey } from '../../../config.js';
 
 const Map = ({ geocode }) => {
@@ -9,7 +10,6 @@ const Map = ({ geocode }) => {
     lng: -121.888682
   }
 
-  const [center, setCenter] = useState(geocode === undefined ? defaultCenter : geocode);
   const style = {
     height: "100%",
     width: "100%",

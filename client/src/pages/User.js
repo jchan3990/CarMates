@@ -6,13 +6,15 @@ import moment from 'moment';
 import { AuthContext } from '../context/auth.js';
 import { FETCH_USER_QUERY, FETCH_USER_POSTS } from '../utils/graphql.js';
 import FollowButton from '../components/FollowButton.jsx';
-import client from '../utils/googleMapsClient.js';
 import Map from '../components/Map.jsx';
 
 const User = (props) => {
   const context = useContext(AuthContext);
   const currUser = context.user ? context.user.username : context.user;
   const username = props.match.params.username;
+  const [userCity, setUserCity] = useState(null);
+  const [userState, setUserState] = useState(null);
+  const [userCountry, setUserCountry] = useState(null);
 
   const { data: {getUser: userData} = {} } = useQuery(FETCH_USER_QUERY, {
     variables: { username }
@@ -31,6 +33,12 @@ const User = (props) => {
     joined = joined.getFullYear();
     let emailLink = `mailto:${email}`;
     const currFollowing = followers.find(follower => follower.username === currUser);
+
+    if (!userCity || !userState || !userCountry) {
+      setUserCity(city);
+      setUserState(state);
+      setUserCountry(country);
+    }
 
     userCard = (
       <Card>
@@ -101,7 +109,7 @@ const User = (props) => {
     <div className='user-profile-container'>
       <div className='user-profile'>
         {userCard}
-        <Map />
+        {userCity && userState && userCountry && <Map city={userCity} state={userState} country={userCountry} />}
       </div>
       <br/>
       <br/>

@@ -5,14 +5,13 @@ import { useMutation } from '@apollo/react-hooks';
 import { AuthContext } from '../context/auth.js';
 import { useForm } from '../utils/hooks.js';
 import { REGISTER_USER } from '../utils/graphql.js';
+import { gMapsKey } from '../../../config.js';
 
 const Register = (props) => {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
 
-  const { onChange, onSubmit, values } = useForm(registerUser, {
+  const { onChange, onSubmit, setValues, values } = useForm(registerUser, {
     email: '',
     username: '',
     password: '',
@@ -20,6 +19,8 @@ const Register = (props) => {
     city: '',
     state: '',
     country: '',
+    lat: 0,
+    long: 0,
     avatar: '',
     carYear: '',
     carMake: '',
@@ -38,7 +39,20 @@ const Register = (props) => {
   })
 
   function registerUser() {
-    addUser();
+    (async (city, state, country) => {
+      try {
+        let address = '';
+        state !== '' ? address = `${city.replace(' ', '+')},+${state},+${country.replace(' ','+')}` : address = `${city.replace(' ', '+')},+${country.replace(' ','+')}`;
+        const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${gMapsKey}`);
+        const data = await response.json();
+        const lat = data.results[0].geometry.location.lat;
+        const long = data.results[0].geometry.location.lng;
+        setValues({...values, lat: lat, long: long})
+        addUser();
+      } catch (err) {
+        console.log(err);
+      }
+    })(values.city, values.state, values.country);
   }
 
   return (

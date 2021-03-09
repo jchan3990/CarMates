@@ -8,6 +8,8 @@ const userSchema = new Schema({
   city: String,
   state: String,
   country: String,
+  lat: Number,
+  long: Number,
   avatar: String,
   carYear: String,
   carMake: String,

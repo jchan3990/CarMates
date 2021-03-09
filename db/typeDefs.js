@@ -33,6 +33,8 @@ module.exports = gql`
     city: String
     state: String
     country: String
+    lat: Float
+    long: Float
     avatar: String
     carYear: String
     carMake: String
@@ -60,6 +62,8 @@ module.exports = gql`
     city: String
     state: String
     country: String
+    lat: Float
+    long: Float
     avatar: String
     carYear: String
     carMake: String

@@ -112,6 +112,8 @@ export const REGISTER_USER = gql`
     $city: String
     $state: String
     $country: String
+    $lat: Float
+    $long: Float
     $avatar: String
     $carYear: String
     $carMake: String
@@ -126,6 +128,8 @@ export const REGISTER_USER = gql`
         city: $city
         state: $state
         country: $country
+        lat: $lat
+        long: $long
         avatar: $avatar
         carYear: $carYear
         carMake: $carMake
