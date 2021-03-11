@@ -361,7 +361,7 @@ const Register = (props) => {
           error={errors.city ? true : false}
           onChange={onChange}
         />
-        {(values.country === 'USA' || values.country === 'US' || values.country === 'United States') &&
+        {values.country === 'USA' &&
           <>
             <label htmlFor="state">State</label>
             <select name="state" id="state" onChange={onChange}>
