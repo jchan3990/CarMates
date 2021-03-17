@@ -31,6 +31,9 @@ const User = (props) => {
     let emailLink = `mailto:${email}`;
     const currFollowing = followers.find(follower => follower.username === currUser);
 
+    let location;
+    state !== '' ? location = `${city}, ${state}, ${country}` : location = `${city}, ${country}`;
+
     userCard = (
       <>
         <Card>
@@ -50,7 +53,7 @@ const User = (props) => {
               </List.Item>
               <List.Item>
                 <List.Icon name='marker' />
-                <List.Content>{`${city}, ${state}, ${country}`}</List.Content>
+                <List.Content>{location}</List.Content>
               </List.Item>
               <List.Item>
                 <List.Icon name='mail' />
